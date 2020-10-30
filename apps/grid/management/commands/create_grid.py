@@ -47,11 +47,14 @@ class Command(BaseCommand):
 
         with open(f'{output_dir}/result.csv', 'w') as out:
             for i in range(rows_cnt):
+                lat = GRID_START_LOC[0]
+                lon = GRID_START_LOC[1]
                 for j in range(cols_cnt):
-                    lat = GRID_START_LOC[0] - i * GRID_STEP
-                    lon = GRID_START_LOC[1] + j * GRID_STEP
 
                     out.write(f"{lat};{lon}\n")
 
                     Cell.objects.create(parent_grid=city_grid,
                                         latitude=lat, longitude=lon)
+
+                    lat -= GRID_STEP
+                    lon += GRID_STEP

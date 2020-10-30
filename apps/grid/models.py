@@ -17,7 +17,7 @@ class Cell(models.Model):
     latitude = DecimalField('Широта левого верхнего угла',
                             max_digits=8, decimal_places=6, default=0.0)
     longitude = DecimalField('Долгота левого верхнего угла',
-                             max_digits=8, decimal_places=6, default=0.0)
+                             max_digits=10, decimal_places=8, default=0.0)
 
     def __str__(self):
         return f'Клетка ({self.latitude}, {self.longitude})'\
