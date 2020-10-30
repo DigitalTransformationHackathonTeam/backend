@@ -126,3 +126,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+GRID_STEP = 0.001
+GRID_START_LOC = (55.910776, 37.348404)
+GRID_END_LOC = (55.572228, 37.874375)
