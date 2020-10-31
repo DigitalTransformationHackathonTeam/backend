@@ -12,10 +12,14 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
+import sys
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Include "apps" subfolder to PATH in order to include apps stored there
+sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -39,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'grid.apps.GridConfig',
 ]
 
 MIDDLEWARE = [
@@ -121,3 +126,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+GRID_STEP = 0.001
+GRID_START_LOC = (55.800611, 37.529865) # (55.910776, 37.348404)
+GRID_END_LOC = (55.686477, 37.744197) # (55.572228, 37.874375)
