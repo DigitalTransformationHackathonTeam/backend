@@ -1,5 +1,5 @@
 from django.db import models
-from django.db.models import CharField, ForeignKey, FloatField
+from django.db.models import CharField, ForeignKey, FloatField, IntegerField
 
 
 class Grid(models.Model):
@@ -16,6 +16,10 @@ class Cell(models.Model):
 
     latitude = FloatField('Широта левого верхнего угла', default=0.0)
     longitude = FloatField('Долгота левого верхнего угла', default=0.0)
+
+    population = IntegerField('Население в данноя ячейке', default=0)
+    dist_to_underground = FloatField('Расстояние до ближайшей станции метро',
+                                     default=0.0)
 
     def __str__(self):
         return f'Клетка ({self.latitude}, {self.longitude}) '\
