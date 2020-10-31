@@ -4,6 +4,7 @@ import geojson
 from backend.settings import GRID_STEP, EXPLANATIONS, FEATURES
 
 
+# unite good zone with nearest
 def unite_with_nearest(lat, lon, MULT=5):
     left_up = (lon - MULT * GRID_STEP, lat + MULT * GRID_STEP)
     left_down = (lon - MULT * GRID_STEP, lat - (MULT + 1) * GRID_STEP)
@@ -14,6 +15,7 @@ def unite_with_nearest(lat, lon, MULT=5):
                              left_down, left_up]])
 
 
+# format to geojson
 def to_geojson(best_cells, scores, explanation):
     features = []
     for index, cell in enumerate(best_cells):
@@ -29,19 +31,12 @@ def to_geojson(best_cells, scores, explanation):
     return geojson.FeatureCollection(features)
 
 
+# normalize data
 def normalize(X):
-    X_scaled = (X - X.min(axis=0)) / (X.max(axis=0) - X.min(axis=0))
-    # if np.all(x == 0):
-    #     return x
-    # for col_ind in range(x.shape[1]):
-    #     column = x[:, col_ind]
-    #     if np.all(column == 0):
-    #         continue
-    #     min_val = np.min(column)
-    #     print(column)
-    #     x[:, col_ind] = (column - min_val) / (np.max(column) - min_val)
-
-    return X_scaled
+    min_val = X.min(axis=0)
+    max_val = X.max(axis=0)
+    X = (X - min_val) / (max_val - min_val)
+    return X
 
 
 def find_best_district(business_w, cells):

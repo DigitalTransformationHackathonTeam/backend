@@ -25,7 +25,8 @@ class Business(models.Model):
     def __str__(self):
         return f'Модель бизнеса {self.business_name}'
 
-    def save(self, *args, **kwargs):
+    # remove spaces and make lowercase
+    def save(self, *args, **kwargs): 
         self.eng_name = self.eng_name.lower()
         self.eng_name = '_'.join(self.eng_name.split(' '))
         super().save(*args, **kwargs)
@@ -43,6 +44,7 @@ class BusinessTag(models.Model):
     def __str__(self):
         return f'Тег бизнеса {self.tag_name}'
 
+    # remove spaces and make lowercase
     def save(self, *args, **kwargs):
         self.eng_name = self.eng_name.lower()
         self.eng_name = '_'.join(self.eng_name.split(' '))

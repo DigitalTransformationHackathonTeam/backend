@@ -28,11 +28,20 @@ $ python3 manage.py create_tags datasets/business/business_tags.csv
 $ python3 manage.py create_businesses
 ```
 
-Создать сетку города:
+Создать город:
 
 ```shell
 $ python3 manage.py create_grid Moscow datasets/business/business_tags.csv
 ```
+
+```shell
+$ python3 manage.py load_dist_to_underground Moscow datasets/grid/metro_distance.csv
+```
+
+```shell
+$ python3 manage.py load_population Moscow datasets/grid/population.csv
+```
+
 
 ## Запуск сервера
 
