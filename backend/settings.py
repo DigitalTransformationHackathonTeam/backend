@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'grid.apps.GridConfig',
     'location_optimizer.apps.LocationOptimizerConfig',
+    'business.apps.BusinessConfig',
 ]
 
 MIDDLEWARE = [
