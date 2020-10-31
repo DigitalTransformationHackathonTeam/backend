@@ -1,5 +1,5 @@
 from django.db import models
-from django.db.models import CharField, ForeignKey, DecimalField
+from django.db.models import CharField, ForeignKey, FloatField
 
 
 class Grid(models.Model):
@@ -14,11 +14,9 @@ class Cell(models.Model):
                              verbose_name='Родительская сетка',
                              on_delete=models.CASCADE)
 
-    latitude = DecimalField('Широта левого верхнего угла',
-                            max_digits=8, decimal_places=6, default=0.0)
-    longitude = DecimalField('Долгота левого верхнего угла',
-                             max_digits=10, decimal_places=8, default=0.0)
+    latitude = FloatField('Широта левого верхнего угла', default=0.0)
+    longitude = FloatField('Долгота левого верхнего угла', default=0.0)
 
     def __str__(self):
-        return f'Клетка ({self.latitude}, {self.longitude})'\
-               'города {self.parent_grid.city_name}'
+        return f'Клетка ({self.latitude}, {self.longitude}) '\
+               f'города {self.parent_grid.city_name}'

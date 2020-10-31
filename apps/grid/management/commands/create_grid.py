@@ -46,15 +46,15 @@ class Command(BaseCommand):
             os.makedirs(output_dir)
 
         with open(f'{output_dir}/result.csv', 'w') as out:
+            lat = GRID_START_LOC[0]
             for i in range(rows_cnt):
-                lat = GRID_START_LOC[0]
                 lon = GRID_START_LOC[1]
                 for j in range(cols_cnt):
+                    cell = Cell.objects.create(parent_grid=city_grid,
+                                               latitude=lat, longitude=lon)
 
-                    out.write(f"{lat};{lon}\n")
-
-                    Cell.objects.create(parent_grid=city_grid,
-                                        latitude=lat, longitude=lon)
-
-                    lat -= GRID_STEP
+                    out.write(f"{cell.id},{lat},{lon}\n")
                     lon += GRID_STEP
+                    # lon = round(lon + GRID_STEP, 6)
+                lat -= GRID_STEP
+                # lat = round(lat - GRID_STEP, 6)
