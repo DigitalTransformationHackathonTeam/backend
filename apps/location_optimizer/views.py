@@ -7,7 +7,9 @@ plug = {
   "features": [
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "id": 1,
+      },
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -42,7 +44,9 @@ plug = {
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "id": 2,
+      },
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -73,7 +77,9 @@ plug = {
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "id": 3,
+      },
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -108,7 +114,9 @@ plug = {
     },
     {
       "type": "Feature",
-      "properties": {},
+      "properties": {
+        "id": 4,
+      },
       "geometry": {
         "type": "Polygon",
         "coordinates": [
@@ -147,4 +155,5 @@ plug = {
 
 class FindBestDistrictView(generics.GenericAPIView):
     def get(self, request, *args, **kwargs):
-        return Response(plug, status=200)
+        response = Response(plug, status=200)
+        return response

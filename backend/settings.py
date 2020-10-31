@@ -31,8 +31,7 @@ SECRET_KEY = 'e3()wtbq2*h23_f9l@o25pr^n(5x9*xlxw)g2%fvad4%hz^92*'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'localhost',
-    '0.0.0.0',
+    '*',
 ]
 
 
@@ -55,13 +54,12 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'backend.urls'
@@ -136,10 +134,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 CORS_ORIGIN_ALLOW_ALL = True
-
-# CORS_ORIGIN_WHITELIST = [
-#     'http://localhost:3000'  # used in docker-compose for frontend dev server
-# ]
 
 GRID_STEP = 0.001
 GRID_START_LOC = (55.800611, 37.529865) # (55.910776, 37.348404)
