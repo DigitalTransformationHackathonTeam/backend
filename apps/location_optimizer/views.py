@@ -97,4 +97,6 @@ plug = {
 
 class FindBestDistrictView(generics.GenericAPIView):
     def get(self, request, *args, **kwargs):
-        return Response(plug, status=200)
+        response = Response(plug, status=200)
+        response['Access-Control-Allow-Origin'] = '*'
+        return response
