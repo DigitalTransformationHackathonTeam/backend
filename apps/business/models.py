@@ -31,7 +31,7 @@ class Business(models.Model):
         super(Business, self).save(*args, **kwargs)
 
 
-class BusinessCategory(models.Model):
+class BusinessTag(models.Model):
     category_name = CharField('Название категории', max_length=1024,
                               default='')
     eng_name = CharField('Название на английском', max_length=1024, default='')
