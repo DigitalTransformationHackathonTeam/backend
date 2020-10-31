@@ -29,18 +29,19 @@ def to_geojson(best_cells, scores, explanation):
     return geojson.FeatureCollection(features)
 
 
-def normalize(x):
-    if np.all(x == 0):
-        return x
-    for col_ind in range(x.shape[1]):
-        column = x[:, col_ind]
-        if np.all(column == 0):
-            continue
-        min_val = np.min(column)
-        print(column)
-        x[:, col_ind] = (column - min_val) / (np.max(column) - min_val)
+def normalize(X):
+    X_scaled = (X - X.min(axis=0)) / (X.max(axis=0) - X.min(axis=0))
+    # if np.all(x == 0):
+    #     return x
+    # for col_ind in range(x.shape[1]):
+    #     column = x[:, col_ind]
+    #     if np.all(column == 0):
+    #         continue
+    #     min_val = np.min(column)
+    #     print(column)
+    #     x[:, col_ind] = (column - min_val) / (np.max(column) - min_val)
 
-    return x
+    return X_scaled
 
 
 def find_best_district(business_w, cells):
@@ -53,6 +54,7 @@ def find_best_district(business_w, cells):
         X[index] = cell.to_numpy()
 
     normalize(X)
+
     for index in range(len(cells)):
         scores[index] = business_w @ X[index]
 
