@@ -14,11 +14,13 @@ def unite_with_nearest(lat, lon, MULT=5):
                              left_down, left_up]])
 
 
-def to_geojson(best_cells):
+def to_geojson(best_cells, scores):
     features = []
     for index, cell in enumerate(best_cells):
         polygon = unite_with_nearest(cell.latitude, cell.longitude)
-        feature = geojson.Feature(geometry=polygon, properties={'id': index})
+        feature = geojson.Feature(geometry=polygon, 
+                                  properties={'id': index,
+                                              'score': scores[index]})
         features.append(feature)
 
     return geojson.FeatureCollection(features)
@@ -50,4 +52,4 @@ def find_best_district(business_w, cells):
 
     best_variants_ind = np.argsort(-scores)[:5]
     best_cells = [cells.get(id=id_list[ind]) for ind in best_variants_ind]
-    return to_geojson(best_cells)
+    return to_geojson(best_cells, scores[best_variants_ind])
