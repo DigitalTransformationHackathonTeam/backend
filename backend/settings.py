@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'grid.apps.GridConfig',
+    'location_optimizer.apps.LocationOptimizerConfig',
 ]
 
 MIDDLEWARE = [

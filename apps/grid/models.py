@@ -24,3 +24,6 @@ class Cell(models.Model):
     def __str__(self):
         return f'Клетка ({self.latitude}, {self.longitude}) '\
                f'города {self.parent_grid.city_name}'
+
+    # def to_vector(self):
+    #     return np.array([self.population, self.dist_to_underground])
