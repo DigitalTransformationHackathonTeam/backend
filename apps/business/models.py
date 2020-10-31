@@ -30,6 +30,24 @@ class Business(models.Model):
         self.eng_name = '_'.join(self.eng_name.split(' '))
         super(Business, self).save(*args, **kwargs)
 
+
+class BusinessCategory(models.Model):
+    category_name = CharField('Название категории', max_length=1024,
+                              default='')
+    eng_name = CharField('Название на английском', max_length=1024, default='')
+    weights = CharField('Веса в формате csv', max_length=1024, default='0.0')
+
+    def to_numpy(self):
+        return np.array([float(w) for w in self.weights.split(',')])
+
+    def __str__(self):
+        return f'Категория бизнеса {self.business_name}'
+
+    def save(self, *args, **kwargs):
+        self.eng_name = self.eng_name.lower()
+        self.eng_name = '_'.join(self.eng_name.split(' '))
+        super(Business, self).save(*args, **kwargs)
+
 # class BusinessCategory:
 #     def __init__(self, type_name: str):
 #         self.type = type_name
