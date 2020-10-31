@@ -28,12 +28,12 @@ class Business(models.Model):
     def save(self, *args, **kwargs):
         self.eng_name = self.eng_name.lower()
         self.eng_name = '_'.join(self.eng_name.split(' '))
-        super(Business, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
 
 class BusinessTag(models.Model):
-    category_name = CharField('Название категории', max_length=1024,
-                              default='')
+    tag_name = CharField('Название тега', max_length=1024,
+                         default='')
     eng_name = CharField('Название на английском', max_length=1024, default='')
     weights = CharField('Веса в формате csv', max_length=1024, default='0.0')
 
@@ -41,25 +41,9 @@ class BusinessTag(models.Model):
         return np.array([float(w) for w in self.weights.split(',')])
 
     def __str__(self):
-        return f'Категория бизнеса {self.business_name}'
+        return f'Тег бизнеса {self.tag_name}'
 
     def save(self, *args, **kwargs):
         self.eng_name = self.eng_name.lower()
         self.eng_name = '_'.join(self.eng_name.split(' '))
-        super(Business, self).save(*args, **kwargs)
-
-# class BusinessCategory:
-#     def __init__(self, type_name: str):
-#         self.type = type_name
-#         self.weight = np.array([])
-
-#         # Load weights vector for this business type
-#         self.load_weights()
-
-#     def load_weights(self):
-#         with open('category_factor_weights.csv') as csv_file:
-#             csv_reader = csv.reader(csv_file, delimiter=',')
-#             factors = next(csv_reader)[1:]
-#             for row in csv_reader:
-#                 if row[0] == self.type:
-#                     self.weight = np.array(list(map(int, row[1:])))
+        super().save(*args, **kwargs)

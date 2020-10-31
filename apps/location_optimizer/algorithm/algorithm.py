@@ -1,7 +1,7 @@
 import numpy as np
 import geojson
 
-from backend.settings import GRID_STEP, EXPLANATIONS
+from backend.settings import GRID_STEP, EXPLANATIONS, FEATURES
 
 
 def unite_with_nearest(lat, lon, MULT=5):
@@ -34,7 +34,10 @@ def normalize(x):
         return x
     for col_ind in range(x.shape[1]):
         column = x[:, col_ind]
+        if np.all(column == 0):
+            continue
         min_val = np.min(column)
+        print(column)
         x[:, col_ind] = (column - min_val) / (np.max(column) - min_val)
 
     return x
@@ -44,7 +47,7 @@ def find_best_district(business_w, cells):
     id_list = [cell.id for cell in cells]
     scores = np.zeros(len(cells))
 
-    X = np.zeros((len(cells), 2))
+    X = np.zeros((len(cells), len(FEATURES)))
 
     for index, cell in enumerate(cells):
         X[index] = cell.to_numpy()
@@ -53,7 +56,7 @@ def find_best_district(business_w, cells):
     for index in range(len(cells)):
         scores[index] = business_w @ X[index]
 
-    best_variants_ind = np.argsort(-scores)[:5]
+    best_variants_ind = np.argsort(-scores)[:3]
     best_cells = [cells.get(id=id_list[ind]) for ind in best_variants_ind]
 
     explanations = []

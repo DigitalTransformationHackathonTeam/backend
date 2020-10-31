@@ -21,6 +21,7 @@ class Cell(models.Model):
     population = IntegerField('Население в данной ячейке', default=0)
     men = IntegerField('Процент мужчин', default=0)
     disabled = IntegerField('Процент инвалидов', default=0)
+    children = IntegerField('Процент детей', default=0)
     elders = IntegerField('Процент пенсионеров', default=0)
     many_children = IntegerField('Процент из многодетных семей', default=0)
     young_parents = IntegerField('Процент молодых родителей', default=0)
@@ -38,7 +39,7 @@ class Cell(models.Model):
                f'города {self.parent_grid.city_name}'
 
     def to_numpy(self):
-        return np.array(
+        return np.array([
                     self.population,
                     self.men,
                     self.disabled,
@@ -49,4 +50,4 @@ class Cell(models.Model):
                     self.dist_to_underground,
                     self.underground_traffic,
                     self.cell_traffic,
-               )
+               ])

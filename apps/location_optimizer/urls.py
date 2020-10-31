@@ -6,6 +6,6 @@ from location_optimizer.views import FindBestDistrictView, \
 urlpatterns = [
     path('find_best_district/<slug:city>/<slug:business_name>',
          FindBestDistrictView.as_view()),
-    path('find_best_for_category/<slug:city>',
+    path('find_best_for_tag/<slug:city>',
          FindBestDistrictForCustomCategoriesView.as_view()),
 ]

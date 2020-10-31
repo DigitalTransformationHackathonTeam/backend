@@ -1,5 +1,5 @@
 from django.contrib import admin
-from business.models import Business
+from business.models import Business, BusinessTag
 
 
 class BusinessAdmin(admin.ModelAdmin):
@@ -7,3 +7,4 @@ class BusinessAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Business, BusinessAdmin)
+admin.site.register(BusinessTag)
