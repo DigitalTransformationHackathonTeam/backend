@@ -6,11 +6,13 @@ from business.models import Business
 sample_data = [
     {
         'business_name': 'Аптека',
+        'eng_name': 'Pharmacy',
         'business_type': 'Goods',
         'weights': '2,1',
     },
     {
         'business_name': 'Парикмахерская',
+        'eng_name': 'hair salon',
         'business_type': 'Service',
         'weights': '1, 2',
     },

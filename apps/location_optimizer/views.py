@@ -1,5 +1,10 @@
 from rest_framework import generics
 from rest_framework.response import Response
+from django.shortcuts import get_object_or_404
+
+from business.models import Business
+from grid.models import Grid
+from location_optimizer.algorithm.algorithm import find_best_district
 
 
 plug = {
@@ -89,7 +94,7 @@ plug = {
               55.784875094551765
             ],
             [
-              37.58474349975586,
+              37.5847434997558,
               55.7761868325538
             ],
             [
@@ -154,6 +159,19 @@ plug = {
 
 
 class FindBestDistrictView(generics.GenericAPIView):
+    lookup_field = ('city', 'business_name')
+
+    def get_cells(self):
+        city = Grid.objects.get(city_name=self.kwargs[self.lookup_field[0]])
+        return city.cells.all()
+
+    def get_object(self):
+        return get_object_or_404(Business,
+                                 eng_name=self.kwargs[self.lookup_field[1]])
+
     def get(self, request, *args, **kwargs):
-        response = Response(plug, status=200)
+        result = find_best_district(self.get_object().to_numpy(),
+                                    self.get_cells())
+        # print('result:', str(ind), flush=True)
+        response = Response(result, status=200)
         return response

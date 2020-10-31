@@ -14,6 +14,7 @@ class Business(models.Model):
     ]
 
     business_name = CharField('Название бизнеса', max_length=1024, default='')
+    eng_name = CharField('Название на английском', max_length=1024, default='')
     weights = CharField('Веса в формате csv', max_length=1024, default='0.0')
     business_type = CharField('Тип бизнеса', max_length=10,
                               choices=BUSINESS_TYPE_CHOICES, default=GOODS)
@@ -23,6 +24,11 @@ class Business(models.Model):
 
     def __str__(self):
         return f'Модель бизнеса {self.business_name}'
+
+    def save(self, *args, **kwargs):
+        self.eng_name = self.eng_name.lower()
+        self.eng_name = '_'.join(self.eng_name.split(' '))
+        super(Business, self).save(*args, **kwargs)
 
 # class BusinessCategory:
 #     def __init__(self, type_name: str):

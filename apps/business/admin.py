@@ -3,7 +3,7 @@ from business.models import Business
 
 
 class BusinessAdmin(admin.ModelAdmin):
-    list_display = ('id', 'business_type', 'business_name')
+    list_display = ('id', 'business_type', 'business_name', 'eng_name')
 
 
 admin.site.register(Business, BusinessAdmin)
