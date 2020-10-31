@@ -4,15 +4,20 @@ import geojson
 from backend.settings import GRID_STEP
 
 
+def unite_with_nearest(lat, lon, MULT=5):
+    left_up = (lon - MULT * GRID_STEP, lat + MULT * GRID_STEP)
+    left_down = (lon - MULT * GRID_STEP, lat - (MULT + 1) * GRID_STEP)
+    right_up = (lon + (MULT + 1) * GRID_STEP, lat + MULT * GRID_STEP)
+    right_down = (lon + (MULT + 1) * GRID_STEP, lat - (MULT + 1) * GRID_STEP)
+
+    return geojson.Polygon([[left_up, right_up, right_down,
+                             left_down, left_up]])
+
+
 def to_geojson(best_cells):
     features = []
     for index, cell in enumerate(best_cells):
-        left_up = (cell.longitude, cell.latitude)
-        left_down = (cell.longitude, cell.latitude - GRID_STEP)
-        right_up = (cell.longitude + GRID_STEP, cell.latitude)
-        right_down = (cell.longitude + GRID_STEP, cell.latitude - GRID_STEP)
-        polygon = geojson.Polygon([[left_up, right_up, right_down,
-                                    left_down, left_up]])
+        polygon = unite_with_nearest(cell.latitude, cell.longitude)
         feature = geojson.Feature(geometry=polygon, properties={'id': index})
         features.append(feature)
 

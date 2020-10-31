@@ -15,12 +15,11 @@ class FindBestDistrictView(generics.GenericAPIView):
         return city.cells.all()
 
     def get_object(self):
-        return get_object_or_404(Business, 
+        return get_object_or_404(Business,
                                  eng_name=self.kwargs[self.lookup_field[1]])
 
     def get(self, request, *args, **kwargs):
         result = find_best_district(self.get_object().to_numpy(),
                                     self.get_cells())
-        # print('result:', str(ind), flush=True)
         response = Response(result, status=200)
         return response
