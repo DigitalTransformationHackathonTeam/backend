@@ -5,8 +5,18 @@ import numpy as np
 
 
 class Business(models.Model):
+    GOODS = 'Goods'
+    SERVICE = 'Service'
+
+    BUSINESS_TYPE_CHOICES = [
+        (GOODS, 'Товары'),
+        (SERVICE, 'Услуги'),
+    ]
+
     business_name = CharField('Название бизнеса', max_length=1024, default='')
     weights = CharField('Веса в формате csv', max_length=1024, default='0.0')
+    business_type = CharField('Тип бизнеса', max_length=10, 
+                              choices=BUSINESS_TYPE_CHOICES, default=GOODS)
 
     def to_numpy(self):
         return np.array([float(w) for w in self.weights.split(',')])
