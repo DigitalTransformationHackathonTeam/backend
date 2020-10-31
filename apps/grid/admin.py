@@ -3,7 +3,7 @@ from grid.models import Grid, Cell
 
 
 class CellAdmin(admin.ModelAdmin):
-    list_display = ('id', 'latitude', 'longitude', 
+    list_display = ('id', 'latitude', 'longitude',
                     'population', 'dist_to_underground')
 
 

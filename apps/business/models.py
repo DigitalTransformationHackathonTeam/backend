@@ -15,7 +15,7 @@ class Business(models.Model):
 
     business_name = CharField('Название бизнеса', max_length=1024, default='')
     weights = CharField('Веса в формате csv', max_length=1024, default='0.0')
-    business_type = CharField('Тип бизнеса', max_length=10, 
+    business_type = CharField('Тип бизнеса', max_length=10,
                               choices=BUSINESS_TYPE_CHOICES, default=GOODS)
 
     def to_numpy(self):
