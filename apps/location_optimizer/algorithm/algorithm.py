@@ -18,7 +18,7 @@ def to_geojson(best_cells, scores):
     features = []
     for index, cell in enumerate(best_cells):
         polygon = unite_with_nearest(cell.latitude, cell.longitude)
-        feature = geojson.Feature(geometry=polygon, 
+        feature = geojson.Feature(geometry=polygon,
                                   properties={'id': index,
                                               'score': scores[index]})
         features.append(feature)

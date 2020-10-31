@@ -35,11 +35,10 @@ class FindBestDistrictForCustomCategoriesView(generics.GenericAPIView):
 
     def get_object(self):
         return get_object_or_404(Business,
-                                 eng_name=self.kwargs[self.lookup_field])
+                                 eng_name='pharmacy')
 
     def get(self, request, *args, **kwargs):
-        # result = find_best_district(self.get_object().to_numpy(),
-                                    # self.get_cells())
-        print(request.query_params, flush=True)
-        response = Response(status=200)
+        result = find_best_district(self.get_object().to_numpy(),
+                                    self.get_cells())
+        response = Response(result, status=200)
         return response
