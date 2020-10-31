@@ -31,7 +31,7 @@ $ python3 manage.py create_businesses
 Создать город:
 
 ```shell
-$ python3 manage.py create_grid Moscow datasets/business/business_tags.csv
+$ python3 manage.py create_grid Moscow datasets/grid/mo.geojson
 ```
 
 ```shell
