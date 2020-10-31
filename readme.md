@@ -1,33 +1,42 @@
 # LocationOptimization
 
-Backend for location optimization service. It helps entrepreneurs
-to choose location for their new business.
+Бэкенд для приложения поиска оптимального места для предприятия
 
-## Install
-
-Use the package manager [pip3](https://pip.pypa.io/en/stable/) to install.
-Python version should be at least 3.8.
+## Установка пакетов
 
 ```shell
 $ pip3 install -r requirements.txt
 ```
 
-## Run
+## Подготовка к работе
+
+Применить миграции:
+
+```shell
+$ python3 manage.py migrate
+```
+
+Создать теги для бизнеса:
+
+```shell
+$ python3 manage.py create_tags datasets/business/business_tags.csv
+```
+
+Создать бизнесы:
+
+```shell
+$ python3 manage.py create_businesses
+```
+
+Создать сетку города:
+
+```shell
+$ python3 manage.py create_grid Moscow datasets/business/business_tags.csv
+```
+
+## Запуск сервера
 
 ```shell
 $ python3 manage.py runserver 0:8000
 ```
 
-## Run the tests
-
-```shell
-$ python3 manage.py test
-```
-
-## Contributing
-
-* Create separate branch for your feature. 
-Then create pull request to dev branch.
-* Ubiquitous type annotation
-* Meaningful commit messages
-* No russian, no transliteration
