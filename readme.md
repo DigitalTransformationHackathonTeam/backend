@@ -25,7 +25,7 @@ $ python3 manage.py create_tags datasets/business/business_tags.csv
 Создать бизнесы:
 
 ```shell
-$ python3 manage.py create_businesses
+$ python3 manage.py create_businesses datasets/business/business_list.csv
 ```
 
 Создать город:
@@ -34,12 +34,16 @@ $ python3 manage.py create_businesses
 $ python3 manage.py create_grid Moscow datasets/grid/mo.geojson
 ```
 
-```shell
-$ python3 manage.py load_dist_to_underground Moscow datasets/grid/metro_distance.csv
-```
+Загрузить данные в ячейки
 
 ```shell
-$ python3 manage.py load_population Moscow datasets/grid/population.csv
+$ python3 manage.py load_cells_info datasets/grid/FinalCellDate.csv
+```
+
+Найти оптимальные веса для бизнеса
+
+```shell
+$ python3 manage.py find_optimal_weights datasets/business/business_data.csv
 ```
 
 
