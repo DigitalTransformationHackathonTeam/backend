@@ -147,6 +147,13 @@ FEATURES = (
     'elders',
     'many_children',
     'young_parents',
+    
+    # new
+    'pregnant',
+    'poor',
+    'labor_veteran',
+    'disabled_children',
+
     'dist_to_underground',
     'underground_traffic',
     'cell_traffic',
@@ -160,6 +167,10 @@ EXPLANATIONS = (
     'Много пенсионеров',
     'Много многодетных семей',
     'Много молодых родителей',
+    'Много беременных',
+    'Много бедных',
+    'Много ветеранов труда',
+    'Много детей инвалидов',
     'Близко к метро',
     'Загруженная станция метро',
     'Популярная улица',

@@ -5,8 +5,8 @@ import numpy as np
 
 
 class Business(models.Model):
-    GOODS = 'Goods'
-    SERVICE = 'Service'
+    GOODS = 'goods'
+    SERVICE = 'service'
 
     BUSINESS_TYPE_CHOICES = [
         (GOODS, 'Товары'),
@@ -26,7 +26,7 @@ class Business(models.Model):
         return f'Модель бизнеса {self.business_name}'
 
     # remove spaces and make lowercase
-    def save(self, *args, **kwargs): 
+    def save(self, *args, **kwargs):
         self.eng_name = self.eng_name.lower()
         self.eng_name = '_'.join(self.eng_name.split(' '))
         super().save(*args, **kwargs)

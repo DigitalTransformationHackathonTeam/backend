@@ -4,10 +4,17 @@ django-cors-headers==3.5.0
 djangorestframework==3.12.1
 flake8==3.8.4
 geojson==2.5.0
+joblib==0.17.0
 mccabe==0.6.1
 numpy==1.19.3
+pandas==1.1.4
 psycopg2-binary==2.8.6
 pycodestyle==2.6.0
 pyflakes==2.2.0
+python-dateutil==2.8.1
 pytz==2020.1
+scikit-learn==0.23.2
+scipy==1.5.3
+six==1.15.0
 sqlparse==0.4.1
+threadpoolctl==2.1.0
