@@ -11,10 +11,15 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import os
+import sys
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Include "apps" subfolder to PATH in order to include apps stored there
+sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -25,7 +30,9 @@ SECRET_KEY = 'e3()wtbq2*h23_f9l@o25pr^n(5x9*xlxw)g2%fvad4%hz^92*'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '*',
+]
 
 
 # Application definition
@@ -37,11 +44,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
+    'rest_framework',
+    'grid.apps.GridConfig',
+    'location_optimizer.apps.LocationOptimizerConfig',
+    'business.apps.BusinessConfig',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -119,3 +132,46 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+CORS_ORIGIN_ALLOW_ALL = True
+
+GRID_STEP = 0.001
+GRID_START_LOC = (55.800611, 37.529865) # (55.910776, 37.348404)
+GRID_END_LOC = (55.686477, 37.744197) # (55.572228, 37.874375)
+
+FEATURES = (
+    'population',
+    'men',
+    'disabled',
+    'children',
+    'elders',
+    'many_children',
+    'young_parents',
+    
+    # new
+    'pregnant',
+    'poor',
+    'labor_veteran',
+    'disabled_children',
+
+    'dist_to_underground',
+    'underground_traffic',
+    'cell_traffic',
+)
+
+EXPLANATIONS = (
+    'Много людей',
+    'Много мужчин',
+    'Много инвалидов',
+    'Много детей',
+    'Много пенсионеров',
+    'Много многодетных семей',
+    'Много молодых родителей',
+    'Много беременных',
+    'Много бедных',
+    'Много ветеранов труда',
+    'Много детей инвалидов',
+    'Близко к метро',
+    'Загруженная станция метро',
+    'Популярная улица',
+)
