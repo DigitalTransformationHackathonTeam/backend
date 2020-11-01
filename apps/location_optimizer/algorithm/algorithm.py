@@ -58,7 +58,12 @@ def find_best_district(business_w, cells):
 
     best_variants_ind = np.argsort(-scores)[:4]
     best_scores = scores[best_variants_ind]
-    best_scores = (best_scores - np.mean(best_scores)) / np.std(best_scores)
+
+    if np.std(best_scores) != 0:
+        best_scores = (best_scores - np.mean(best_scores)) /\
+                        np.std(best_scores)
+    else:
+        best_scores = best_scores - np.mean(best_scores)
 
     best_scores = expit(best_scores + 0.75) * 100
 
