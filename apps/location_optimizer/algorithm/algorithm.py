@@ -54,9 +54,14 @@ def find_best_district(business_w, cells):
     X = scaler.fit_transform(X)
 
     for index in range(len(cells)):
-        scores[index] = expit(business_w @ X[index]) * 100
+        scores[index] = business_w @ X[index]
 
     best_variants_ind = np.argsort(-scores)[:4]
+    best_scores = scores[best_variants_ind]
+    best_scores = (best_scores - np.mean(best_scores)) / np.std(best_scores)
+
+    best_scores = expit(best_scores + 0.75) * 100
+
     best_cells = [cells.get(id=id_list[ind]) for ind in best_variants_ind]
 
     explanations = []
@@ -65,4 +70,4 @@ def find_best_district(business_w, cells):
         most_weight = np.argmax(business_w * X[index])
         explanations.append(EXPLANATIONS[most_weight])
 
-    return to_geojson(best_cells, scores[best_variants_ind], explanations)
+    return to_geojson(best_cells, best_scores, explanations)
