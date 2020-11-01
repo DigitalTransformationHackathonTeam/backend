@@ -45,6 +45,9 @@ def to_geojson(best_cells, scores, explanation):
             if count[i] and is_intersection(polygons[i], polygons[j]):
                 count[j] = False
 
+    if len(polygons) > 5:
+        polygons = polygons[:5]
+
     features = []
     index = 0
     for ind, polygon in enumerate(polygons):
