@@ -1,11 +1,13 @@
 import numpy as np
 import geojson
+from scipy.special import expit
+from sklearn.preprocessing import MinMaxScaler
 
 from backend.settings import GRID_STEP, EXPLANATIONS, FEATURES
 
 
 # unite good zone with nearest
-def unite_with_nearest(lat, lon, MULT=4.5):
+def unite_with_nearest(lat, lon, MULT=3.5):
     left_up = (lon - MULT * GRID_STEP, lat + MULT * GRID_STEP)
     left_down = (lon - MULT * GRID_STEP, lat - (MULT + 1) * GRID_STEP)
     right_up = (lon + (MULT + 1) * GRID_STEP, lat + MULT * GRID_STEP)
@@ -18,7 +20,6 @@ def unite_with_nearest(lat, lon, MULT=4.5):
 # format to geojson
 def to_geojson(best_cells, scores, explanation):
     features = []
-    scores *= 10
     for index, cell in enumerate(best_cells):
         polygon = unite_with_nearest(cell.latitude, cell.longitude)
         feature = geojson.Feature(geometry=polygon,
@@ -48,11 +49,12 @@ def find_best_district(business_w, cells):
 
     for index, cell in enumerate(cells):
         X[index] = cell.to_numpy()
-        # X[index] = np.random.random(len(FEATURES)) * 3
-    normalize(X)
+
+    scaler = MinMaxScaler()
+    X = scaler.fit_transform(X)
 
     for index in range(len(cells)):
-        scores[index] = business_w @ X[index]
+        scores[index] = expit(business_w @ X[index]) * 100
 
     best_variants_ind = np.argsort(-scores)[:4]
     best_cells = [cells.get(id=id_list[ind]) for ind in best_variants_ind]
